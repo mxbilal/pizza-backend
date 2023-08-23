@@ -10,6 +10,7 @@ const session = require('express-session');
 const expressHbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store); // initalize sequelize with session store
 
+
 const app = express();
 // const csrfProtection = csrf();
 const router = express.Router();
