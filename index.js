@@ -10,6 +10,7 @@ const session = require('express-session');
 const expressHbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store); // initalize sequelize with session store
 
+
 const app = express();
 // const csrfProtection = csrf();
 const router = express.Router();
@@ -18,6 +19,7 @@ const router = express.Router();
 const webRoutes = require('./routes/web');
 const db = require('./app/models/index');
 const errorController = require('./app/controllers/ErrorController');
+
 
 env.config();
 app.use(cors())
