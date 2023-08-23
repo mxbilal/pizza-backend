@@ -16,6 +16,7 @@ const app = express();
 const router = express.Router();
 
 //Loading Routes
+
 const webRoutes = require('./routes/web');
 const db = require('./app/models/index');
 const errorController = require('./app/controllers/ErrorController');
