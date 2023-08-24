@@ -1,7 +1,7 @@
 require('dotenv').config();
 const db = require('../models');
 const stripe = require('stripe')(process.env.CLIENT_STRIPE_SECRET_KEY);
-let SUCCESSURL="http://www.rezzlist.com/Congratulations"
+let SUCCESSURL="http://www.pizza.com/Congratulations"
 
 
 exports.startCheckOut = async ( req, res ) => {

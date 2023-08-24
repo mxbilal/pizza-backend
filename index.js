@@ -8,6 +8,7 @@ const flash = require('express-flash');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const expressHbs = require('express-handlebars');
+const expressValidator = require('express-validator')
 const SequelizeStore = require('connect-session-sequelize')(session.Store); // initalize sequelize with session store
 
 
@@ -19,7 +20,7 @@ const router = express.Router();
 const webRoutes = require('./routes/web');
 const db = require('./app/models/index');
 const errorController = require('./app/controllers/ErrorController');
-
+const adminRoutes = require('./routes/admin')
 
 env.config();
 app.use(cors())
@@ -64,6 +65,7 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 app.use('/api',webRoutes);
+app.use('/admin',adminRoutes)
 app.use(errorController.pageNotFound);
 app.get('/api/test', (req, res) => {
 	res.send('Server is Up!');

@@ -3,7 +3,7 @@ const db = require("../models");
 const stripe = require("stripe")(process.env.CLIENT_STRIPE_SECRET_KEY);
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.SALT_FOR_ACCOUNT);
-let SUCCESSURL="http://www.rezzlist.com/Congratulations"
+let SUCCESSURL="http://www.pizza.com/Congratulations"
 
 
 exports.sellPurchasedReservation = async (req, res) => {

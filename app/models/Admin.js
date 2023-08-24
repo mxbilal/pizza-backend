@@ -14,6 +14,14 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            profileImage: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
+            adminType: {
+                type: Sequelize.ENUM("super_admin", "admin"),
+                defaultValue: "admin"
+            }
         },
         {
             indexes: [

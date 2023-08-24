@@ -55,8 +55,8 @@ const createStripeProviderAccountLink = async (accountId, res) => {
     const accountLink = await stripe.accountLinks.create({
       account: accountId,
       type: "account_onboarding",
-      refresh_url: `http://www.rezzlist.com`,
-      return_url: `http://www.rezzlist.com`,
+      refresh_url: `http://www.pizza.com`,
+      return_url: `http://www.pizza.com`,
     });
     console.log("accountLink", accountLink);
     return accountLink;

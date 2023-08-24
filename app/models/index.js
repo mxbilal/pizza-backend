@@ -27,6 +27,7 @@ db.adminSessions = require("./adminSession")(sequelizeInstance, Sequelize);
 db.usersSessions = require("./usersSessions")(sequelizeInstance, Sequelize);
 db.adminResetCodes = require("./adminResetCode")(sequelizeInstance, Sequelize);
 db.usersTwilioCodes = require("./usersTwilioCodes")(sequelizeInstance, Sequelize);
+db.products = require("./Products")(sequelizeInstance, Sequelize);
 // db.restaurantsLocations = require("./restaurantLocation")(sequelizeInstance, Sequelize);
 
 /**************** relationships ***************/
