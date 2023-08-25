@@ -28,6 +28,7 @@ db.usersSessions = require("./usersSessions")(sequelizeInstance, Sequelize);
 db.adminResetCodes = require("./adminResetCode")(sequelizeInstance, Sequelize);
 db.usersTwilioCodes = require("./usersTwilioCodes")(sequelizeInstance, Sequelize);
 db.products = require("./Products")(sequelizeInstance, Sequelize);
+db.categories = require("./category")(sequelizeInstance, Sequelize);
 // db.restaurantsLocations = require("./restaurantLocation")(sequelizeInstance, Sequelize);
 
 /**************** relationships ***************/
@@ -83,6 +84,9 @@ db.bookings.belongsTo(db.reservations, { foreignKey: "reservationId" });
 db.users.hasMany(db.bookings, { foreignKey: "userId" });
 db.bookings.belongsTo(db.users, { foreignKey: "userId" })
 
+
+db.products.hasMany(db.categories, { foreignKey: "productId" });
+db.categories.belongsTo(db.products, { foreignKey: "productId" });
 
 
 /************************ *********************/

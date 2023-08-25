@@ -24,17 +24,4 @@ router.get('/pizza', Products.get)
 // delete product
 router.delete('/pizza', Products.delete)
 
-// create pizza category
-router.post('/pizza/type', Products.catergory.create)
-
-// update pizza category
-router.put('/pizza/type', Products.catergory.update);
-
-// delete pizza category
-router.delete('/pizza/type', Products.catergory.delete);
-
-// get pizza category
-router.get('/pizza/type', Products.catergory.get);
-
-
 module.exports = router;
