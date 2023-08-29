@@ -7,10 +7,7 @@ const sellReservation = require('../app/stripe/sellReservation');
 var { uploadImage } = require('../app/uploadCards/uploadImage');
 const userController = require('../app/controllers/userController');
 const commonFunctions = require('../app/controllers/commonFunctions');
-// const AuthController = require('../app/controllers/AuthController');
-const bookingsController = require('../app/controllers/bookingsController');
 const adminAuthController = require('../app/controllers/adminAuthController');
-const reservationsController = require("../app/controllers/reservationsController");
 const connectedAccount = require('../app/stripe/connectedAccount');
 
 const user = '/user'
@@ -114,10 +111,6 @@ router.put(admin+'/restaurant', adminAuthController.updateRestaurant);
 router.use(admin+'/restaurant/:id', commonFunctions.verifyToken);
 router.delete(admin+'/restaurant/:id', adminAuthController.deleteRestaurant);
 
-// generate code for adding restaurant reservations
-/************ **************/
-router.use('/reservation/code', commonFunctions.verifyToken);
-router.get('/reservation/code', reservationsController.generateCode);
 
 // admin routers for getting all payouts
 router.get(admin+'/payoutRequests', adminpayout.getAllPayoutRequest);
@@ -125,38 +118,6 @@ router.get(admin+'/payoutRequests', adminpayout.getAllPayoutRequest);
 // admin routers for getting all payouts
 // router.use(admin+'/payoutsuccess', commonFunctions.payoutSuccess);
 router.post(admin+'/payoutsuccess', adminpayout.payoutSuccess);
-
-// add reservations
-
-/************ **************/
-router.use(admin+'/reservation', commonFunctions.verifyToken);
-router.post(admin+'/reservation', reservationsController.addReservations);
-
-// update reservation, it only updates available reservations.
-
-/************ **************/
-// router.use(admin+'/reservation', commonFunctions.verifyToken);
-router.put(admin+'/reservation', reservationsController.updateReservations);
-
-
-//get all/single the reservations, it only inlcudes sold and available reservation
-/************ **************/
-router.use(admin+'/reservation/:id', commonFunctions.verifyToken);
-router.get(admin+'/reservation/:id', reservationsController.getReservations);
-
-// delete reservations
-/************ **************/
-router.use(admin+'/reservation/:id', commonFunctions.verifyToken);
-router.delete(admin+'/reservation/:id', reservationsController.deleteReservations);
-
-// get reservations of a user
-/************ **************/
-router.use(admin+'/user/reservations/:id', commonFunctions.verifyToken);
-router.get(admin+'/user/reservations/:id', bookingsController.getUserReservations)
-
-
-
-
 
 
 // get all users/single user
@@ -221,32 +182,6 @@ router.use(user+'/city', commonFunctions.verifyToken);
 router.post(user+'/city', userController.addCity);
 
 
-//user Edit reservation
-router.use(user+'/editreservations', commonFunctions.verifyToken);
-router.put(user+'/editreservations',reservationsController.editReservations);
-
-//user delete reservation
-// router.use(user+'/deletereservation/:id', commonFunctions.verifyToken);
-router.delete(user+'/deletereservation/:id',reservationsController.userDeleteReservations);
-
-// user add booking
-// router.post(user+'/booking', bookingsController.addBookings);
-
-// get user reservation/ bookings
-/************ **************/
-router.use(user+'/booking', commonFunctions.verifyToken);
-router.get(user+'/booking', bookingsController.getMyReservations);
-
-// get user getPurchasedReservations/ bookings
-/************ **************/
-router.use(user+'/purchasedreservations', commonFunctions.verifyToken);
-router.get(user+'/purchasedreservations', bookingsController.getPurchasedReservations);
-
-// get Total earning of a user
-/************ **************/
-router.use(user+'/gettotalearnings', commonFunctions.verifyToken);
-router.get(user+'/gettotalearnings', bookingsController.getTotalEarnings)
-
 // sell reservation that user purchased
 /************ **************/
 router.use(user+'/sellPurchasedReservation', commonFunctions.verifyToken);
@@ -260,15 +195,6 @@ router.use(user+'/adduserreservations', commonFunctions.verifyToken);
 router.post(user+'/adduserreservations',userReservation.createReservation)
 router.get(user+'/reservationbyuser', userReservation.addUserReservations); 
 
-// filter reservations based on price and seats
-/************ **************/
-router.use(user+'/filter/reservations', commonFunctions.verifyToken);
-router.post(user+'/filter/reservations', reservationsController.filterReservations);
-
-// filter reservations based on date
-/************ **************/
-router.use(user+'/date/filter/reservations', commonFunctions.verifyToken);
-router.post(user+'/date/filter/reservations', reservationsController.filterDateReservations)
 
 // user update profile
 router.use(user+'/update/profile', commonFunctions.verifyToken);
@@ -288,18 +214,6 @@ router.get(user+'/success/checkout', checkOut.successCheckOut);
 
 // on some error or cancel
 router.post(user+'/cancel/checkout', checkOut.cancelCheckOut);
-
-
-// get reservations and restauratns of a city
-/************ **************/
-router.use(`${user}/reservatiosn/:cityId`, commonFunctions.verifyToken);
-router.get(`${user}/reservatiosn/:cityId`, reservationsController.cityReservations)
-
-
-// router.post('/admin/logout', AdminAuthController.logout);
-// router.post('/admin/sign-up', AdminAuthController.signUp);
-// router.post('/admin/forgot-password', AdminAuthController.forgotPassword);
-
 
 
 //default route if no route matches
